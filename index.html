@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Vue App</title>
+</head>
+<body>
+    
+    <div id="app">
+        <h1>{{message}}</h1>  
+        <input v-model="message" style="width: 200px;"> <!--enlace del input con el script-->
+    </div>
+
+    <div id="app-2">
+        <h2>{{message}}</h2>
+    </div>
+
+    <div id="app-3">
+        <span v-bind:title="message">
+          Hover your mouse over me for a few seconds
+          to see my dynamically bound title!
+        </span>
+    </div>
+    <br>
+    <br>
+    <div id="app-4">
+        <span v-if="seen">Now you see me</span>
+    </div>
+    <br><br>
+    <div id="app-5">
+        <!--el v-else tiene que ir seguido del v-if para que funcione-->
+        <template v-if="!message">
+             <h1>¡Debes enviar un mensaje de ayuda!</h1>
+             <p>¡Envia un mensajero inmediatamente!</p>
+             <p>¡Al cercano Reino de Corazones!</p>
+        </template>
+            
+        <h1 v-else>{{message}}</h1>
+        <textarea v-model="message"></textarea>
+        <button v-if ="message">Enviar un mensaje de ayuda</button>
+    </div>
+    <br><br>
+    <br><br>
+
+    <div id="app-6">
+        <ol>
+            <li v-for="storie in stories">{{ storie.text}} - {{storie.edad}}</li>
+        </ol>
+        <ol>
+            <li v-for="edad in edades">{{edad}}</li>
+        </ol>
+    </div>
+
+    <br><br>
+    <br><br>
+
+    <div class="container">
+        <h1>Tabla de multiplicar de 4.</h1>
+        
+        <ul class="list-group">
+            <li v-for="i in 11" class="list-group-item">
+                 {{ i-1 }} por 4 es igual a {{ (i-1) * 4 }}.
+            </li>
+            <br>
+            
+            <li v-for='num in array' class="list-group-item">
+                {{num*5}}
+            </li>
+        </ul>
+    </div>
+
+
+    <br><br>
+    <br><br>
+
+    <div class="container" id="app-7">
+        <h1>¡Escuchemos algunas historias!</h1>
+        <ul class="list-group">
+            <li v-for="value in story" class="list-group-item">
+                {{ value.plot }} - {{value.scritore}} -{{value.upvotes}}
+            </li>
+
+            <li v-for='(value,key,index) in story' class="list-group-item">
+                {{index}} : {{key}} : {{value}}
+            </li>
+        </ul>
+    </div>
+    
+    <br> 
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h2>Handling: Maneadores de eventos: </h2>
+
+    <div id='app-8'>
+        <p>{{message}}</p>
+        <button @click="invertirMessage" >Reverse Message</button>
+    </div>
+
+    <div id="app-9">
+        <button v-on:click="contador++">Incrementador en: {{contador}}</button>
+    </div>
+
+    <div id="app-10">
+        <button id="boton" @click="contadores">Incrementador en: {{contador}}</button>
+    </div>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

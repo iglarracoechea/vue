@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Ej 2-Vue</title>
+</head>
+<body>
+    <div class="container" id="app">
+        <header>
+            <h2 v-if="genero"  class="text-danger"> Mr. {{name}}</h2>
+            <h2 v-else="genero" class="text-info"> Mr. {{name}}</h3>
+        </header>
+        <form action="" class="">
+            <h2></h2>
+            <div class="form-group">
+                <label>Seleccione su genero:</label><br>
+               <!-- <input v-model="genero" type="text" class="form-control w-25 radio-inline">-->
+                <label>Hombre</label>
+                
+                <input :value="true" v-model="genero" type="radio" class="form-control w-25 radio-inline"><br>
+                <label>Mujer</label>
+                
+                <input :value="false" v-model="genero"type="radio" class="form-control w-25 radio-inline"><br>
+                <label  for="name" >Ingresa tu nombre:</label>
+                <input v-model='name' class="form-control">
+            </div>
+        </form>
+        <pre>
+            name: {{$data.name}}
+            genero: {{$data.genero}}
+        </pre>
+    
+        <!--Al usar v-if, si la condición es falsa en el renderizado inicial no hará nada, esto es,
+        el bloque condicional no será renderizado hasta que la condición se vuelva verdadera
+        por primera vez. En general, v-if tiene un costo mayor de alteración o cambio mientras
+        que v-show tiene un costo de renderización inicial mayor. Por lo tanto elige v-show si
+        necesitas alterar o cambiar algo muy a menudo y elige v-if si la condición es poco
+         probable que cambie durante la ejecución-->
+    </div>
+
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                name:'',
+                genero: 'Hombre'
+            }
+        })
+
+    </script>
+</body>
+</html>
