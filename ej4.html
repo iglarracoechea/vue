@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Ej 4</title>
+</head>
+<body>
+    <div id="app" class="m-3">
+        <h1 class="h1 text-success">Ingresa dos numeros y escoge una operación</h1>
+        <form @submit.prevent = "operation" class="form-inline d-flex">
+            <input  v-model.number="number" class="form-group w-25">
+            <select v-model="operator" class="m-3">
+                <option>+</option>
+                <option>-</option>
+                <option>*</option>
+                <option>/</option>
+            </select>
+            <input v-model.number="number2" type="" class="form-group">
+            <button class="btn btn-info m-3" @click= "result">Calcular</button>
+        </form>
+        <h2 class="h2">Resultado: {{number}} {{operator}} {{number2}} = {{result}} </h2>
+    </div>
+
+    <script>
+        /*
+        const app = new Vue({
+            el: '#app',
+            data:{
+                number: 0,
+                number2:0,
+                operator: '+',
+                resultado: 0
+            },
+            methods: {
+                operation(){
+                    switch (this.operator) {
+                        case '+':
+                            this.resultado = this.number + this.number2;
+                            break;
+                        case '-':
+                            this.resultado = this.number - this.number2;
+                            break;
+                        case '*':
+                            this.resultado = this.number * this.number2;
+                            break;
+                        case '/':
+                            this.resultado = this.number / this.number2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            },
+        })
+
+        */
+
+        const app = new Vue({
+            el: '#app',
+            data:{
+                number: 0,
+                number2:0,
+                operator: '+',
+            },
+            computed: {
+                result(){
+                    switch (this.operator) {
+                        case '+':
+                            return this.number + this.number2;
+                            break;
+                        case '-':
+                            return this.number - this.number2;
+                            break;
+                        case '*':
+                            return this.number * this.number2;
+                            break;
+                        case '/':
+                            return this.number / this.number2;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            },
+        })
+
+    </script>
+</body>
+</html>
