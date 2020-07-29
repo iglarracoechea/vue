@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app" class="">
+        <div class="ml-4">   
+            <h1 class="h1">Gente de Vue</h1>
+        
+             <ul class="list-group">
+                <li class="list-group-item" v-for="apenom in alcalde">Mr.{{apenom.apellido}} {{apenom.votos}}
+                    <button class="btn btn-info" @click="apenom.votos++">Votar</button>
+                    <button class="btn btn-warning" @click="apenom.votos--">Eliminar Voto</button>
+                </li>
+            </ul>
+        
+            <input class="w-50 mt-4 d-inline" @keyup.delete="suprimir" placeholder="Presiona delete para resetear los votos">
+            <button class="btn btn-danger" @click="suprimir">Reiniciar Votación</button>
+            <h1 class="h1" >¡Nuestro alcalde es Mr.{{mayor.apellido}} !</h1>
+        </div>  
+    </div>
+
+    <script>
+
+        const app = new Vue({
+            el:'#app',
+            data: {
+                alcalde:[
+                    {apellido:'Black', votos:135},
+                    {apellido:'Pink',  votos:155},
+                    {apellido:'White', votos:165},
+                    {apellido:'Brown', votos:135},
+                ],
+                total:0,
+            },
+            methods: {
+                suprimir(){
+                   this.alcalde = this.alcalde.map((candidato) =>{
+                        candidato.votos = 0
+                        return candidato
+                    })
+                }
+            },
+            computed: {
+                mayor(){
+                    let ordenar = this.alcalde.sort((a,b) =>{
+                        return b.votos - a.votos
+                    })
+                    return ordenar[0];
+                    
+                }
+            },
+
+        })
+
+    </script>
+
+</body>
+</html>
