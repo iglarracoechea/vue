@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Filter</title>
+</head>
+<body>
+    <div class="container" id="app">
+      <h1>¡Escuchemos algunas historias!</h1>
+        <div>
+             <h3>Historias de Alex</h3>
+             <ul class="list-group">
+                <li v-for="story in storiesBy('Alex')" class="list-group-item">
+                    {{ story.writer }} dijo "{{ story.writer }}"
+                </li>
+             </ul>
+            <h3>Historias de John</h3>
+            <ul class="list-group">
+                <li v-for="story in storiesBy('John')"class="list-group-item">
+                    {{ story.writer }} dijo "{{ story.writer }}"
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                stories: [
+                    {plot:'Me estrelle con el avión', writer:"Alex"},
+                    {plot:'Me robaron hoy', writer:"John"},
+                    {plot:'Se comieron mi chocolate', writer:"John"},
+                    {plot:'Me una empanada', writer:"Alex"}
+                ]
+            },
+            methods: {
+                storiesBy:function(writer) {
+                    return this.stories.filter(story => {
+                        return story.writer === writer
+                            
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+</html>
