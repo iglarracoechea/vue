@@ -21,8 +21,30 @@
             <h3>Historias de John</h3>
             <ul class="list-group">
                 <li v-for="story in storiesBy('John')"class="list-group-item">
-                    {{ story.writer }} dijo "{{ story.writer }}"
+                    {{ story.writer }} dijo "{{ story.writer}}"
                 </li>
+            </ul><br><br>
+            <ul class="list-group">
+                <li v-for="story in famous"class="list-group-item">
+                    {{ story.writer }} dijo "{{ story.writer}} {{story.upvotes}}"
+                </li>
+            </ul><br>
+            <form class="">
+                <label for="query" class="text-danger font-weight-bolder">Cosa stai cercando ?</label><br>
+                <input class="w-50" v-model="query">
+
+                <h2>Resultados de la busqueda:</h2>
+                <ul class="list-group-item">
+                    <li v-for="story in find" class="list-group-item">
+                        {{story.plot}}
+                    </li>
+                </ul>
+            </form><br><br>
+            <ul class="list-group-inline">
+                <li class="list-group-item" v-for="votes in ordenar">
+                    Total votos de: {{votes.writer}} es {{votes.upvotes}}
+                </li>
+                <button @click="order=order * -1">ordenar</button>
             </ul>
         </div>
 
@@ -34,20 +56,36 @@
             el:'#app',
             data:{
                 stories: [
-                    {plot:'Me estrelle con el avión', writer:"Alex"},
-                    {plot:'Me robaron hoy', writer:"John"},
-                    {plot:'Se comieron mi chocolate', writer:"John"},
-                    {plot:'Me una empanada', writer:"Alex"}
-                ]
+                    {plot:'Me estrelle con el avión', writer:"Alex", upvotes:20},
+                    {plot:'Me robaron hoy', writer:"John",upvotes:28},
+                    {plot:'Se comieron mi chocolate', writer:"John",upvotes:60  },
+                    {plot:'Me una empanada', writer:"Alex",upvotes:65},
+                ],
+                query:' ',
+                order: -1
             },
             methods: {
                 storiesBy:function(writer) {
-                    return this.stories.filter(story => {
-                        return story.writer === writer
-                            
-                    })
-                }
+                    return this.stories.filter(story => {return story.writer === writer});
+                },
             },
+            computed: {
+                famous: function(){
+                    return this.stories.filter(item => {return item.upvotes > 25 });
+                },
+                find: function(){
+                    let query = this.query;
+                    return this.stories.filter(story => {return story.plot.includes(query)});
+                },
+                ordenar:function(){
+                    let ordenar = this.stories.sort((a,b)=>{return a.upvotes - b.upvotes})
+                    return ordenar
+                },
+                ordenar:function(){
+                    let order = this.order
+                    return this.stories.sort((a,b)=>{return (b.upvotes - a.upvotes)*order})
+                }
+            }
         })
     </script>
 </body>
