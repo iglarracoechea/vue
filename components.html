@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Components</title>
+</head>
+<body>
+
+        <div id="app">
+            <story plot="Mi caballo es genial."></story>
+            <story plot="Los narvales inventaron el Shish Kebab."></story>
+            <story plot="El lado oscuro de la Fuerza es más fuerte."></story>
+        </div>
+        
+        <template id="story-template">
+                <h1>{{plot}}</h1>
+        </template>
+    
+    <script type="text/javascript">
+        
+        const componente = Vue.component('story',{
+                props: ['plot'],       //darle un nombre unico
+                template:'#story-template'
+        });
+
+        const app = new Vue({
+            el:'#app'
+        })
+    </script>
+
+</body>
+</html>

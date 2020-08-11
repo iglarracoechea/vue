@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Life Cycle</title>
+</head>
+<body>
+    
+    <div id="app" class="container">
+
+        <h3>{{saludo}}</h3>
+        <button @click ="saludo = 'Saludo Cambiado'">Cambiar</button>
+        <button @click="destruir()">Destruir</button>
+
+    </div>
+
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data:{
+                saludo:'soy el ciclo de vida de Vue'      
+            },
+            beforeCreate() { //se ejecuta antes de que se cree la instancia
+                console.log('beforeCreate')
+            },
+            created() { //al crear metodos,observadores y eventos, pero aun no se puede acceder al dom
+                console.log('created') //
+            },
+            beforeMount() {
+              console.log('beforeMount') //se ejecuta antes de insertar el dom  
+            },
+            mounted() {
+                console.log('mounted') //se ejecuta al insertar el dom
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate') //al detectar un cambio
+            },
+            updated() {
+                console.log('updated') //al realizar los cambios en el dom
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy'); //antes de destruir la instancia
+            },
+            destroyed() {
+                console.log('destroyed') //se destruye toda la instancia
+            },
+            methods: {
+                destruir(){
+                    this.$destroy();
+                }
+            },
+        })
+    </script>
+
+</body>
+</html>
