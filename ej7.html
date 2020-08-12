@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>¿A dónde te gustaria ir?</h1>
+        </header>
+        <ul>
+            <planets class="list-group-item" v-for="(planet,index) in planets" :planets="planet">
+               <!-- {{planet.name}} : - {{planet.visits}}-->
+            </planets> 
+        </ul>
+    </div>
+
+    <template id="planet-template">
+        <li class="list-group-item">
+            Planeta {{planets.name}}: visitado {{planets.visits}} veces 
+            <button v-if="limit"class="btn btn-warning" @click="visitar">Visitar</button>
+            <span v-show="planets.visits > 0"class="fa fa-rocket fa-2x pull-right" aria-hidden="true"></span>
+        </li>
+    </template>
+
+
+    <script>
+        Vue.component('planets',{
+            props:['planets'],
+            template:'#planet-template',
+            methods: {
+                visitar: function(){
+                    this.planets.visits++
+                }
+            },
+            computed: {
+                limit:function(){
+                    return this.planets.visits < 3
+                }
+            },
+        })
+
+        new Vue({
+            el:'#app',
+            data: {
+                planets: [
+                    {name:'Marte', visits: 0},
+                    {name:'Mercurio', visits: 0},
+                    {name:'Júpiter', visits: 0},
+                    {name:'Saturno', visits: 0},
+                    {name:'Venus', visits: 0}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

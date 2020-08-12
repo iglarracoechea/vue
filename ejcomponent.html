@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Ejemplo component:</title>
+</head>
+<body>
+    <div class="container" id="app">
+        <h1>¡Escuchemos algunas historias!</h1>
+               <h3>Historias de Alex</h3>
+               <ul class="list-group">
+                  <story v-for="story in stories" :favorite="favorite" :story="story" class="list-group-item">
+                      <!--{{ story.writer }} dijo "{{ story.writer }}-->
+                  </story>
+               </ul>
+    </div>
+    
+    <template id="story-template">
+        <li class="list-group-item">
+            {{story.writer}} dijo " {{story.plot}} ".
+            {{story.upvotes}} votos
+            <button  v-show="!story.voted" @click="upvote" class="btn btn-dark">Votar</button>
+            <button v-show="!isFavorite" @click="setFavorite" class="btn btn-primary">Favorita</button>
+            <span v-show = 'isFavorite' class="btn btn-success" aria-hidden="true">*</span>
+        </li>
+    </template>
+
+
+    <script>
+        
+        Vue.component('story',{
+            props:['story','favorite'],
+            template:'#story-template',
+            methods: {
+                upvote: function(){
+                    this.story.upvotes += 1
+                    this.story.voted = true;
+                },
+                setFavorite:function(){
+                    this.favorite = this.story;
+                },
+            },
+            computed: {
+                isFavorite: function(){
+                    return this.story === this.favorite;
+                }
+            },
+        });
+
+        const app = new Vue({
+            el:'#app',
+            data: {
+                stories: [
+                    {plot:'Mi caballo es genial', writer:'Mr.Weebl', upvotes: 28, voted:false },
+                    {plot:'Los narvales inventaron el Shish Kebab', writer:'Mr.Ignacio' , upvotes: 12, voted:false },
+                    {plot:'Mi perro es horrible',writer:'Mr Jorge' , upvotes: 44, voted:false },
+                    {plot:'El lado oscuro de la fuerza es más fuerte', writer:'Darth Vader' , upvotes: 35, voted:false },
+                ],
+                favorite:{}
+            }
+        })
+    </script>
+</body>
+</html>
